@@ -54,5 +54,4 @@ jobs:
 
     - name: Run tests
       run: |
-        docker run  -p 8080:8080 --rm ${{ secrets.DOCKERHUB_USERNAME }}/currency_converter:$TAG
         pytest tests/
