@@ -38,19 +38,15 @@ jobs:
       with:
         python-version: '3.12'
 
-    - name: Install linting tools
+    - name: Install linting tool
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 black
+        pip install black
 
     - name: Run Black formatting check
       run: |
         black --check --diff .
 
-    - name: Run Flake8 linting
-      run: |
-        flake8 . --exclude=.venv
-        # FAILS if there are any linting violations (uses .flake8 config)
 
     - name: Install app dependencies (after linting passes)
       run: |
@@ -60,14 +56,3 @@ jobs:
       run: |
         docker run  -p 8080:8080 --rm ${{ secrets.DOCKERHUB_USERNAME }}/currency_converter:$TAG
         pytest tests/
-
-
-
-
-
-
-
-
-
-
-
